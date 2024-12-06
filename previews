@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# This preview script depends on both MS Word and LibreOffice being installed
+# - Previews are genertated natively with each word processor so that they are as true to user experience as possible.
+# - Variations in available fonts may make things work differently in different environments 
+#
+
+source .virtpy/bin/activate
+# Activate virtual environment 
+
+# Use docx2pdf for docx (which is an interface to Word APIs)
+.virtpy/bin/docx2pdf templates/ pdf-preview/ 
+
+# Use LibreOffice for odt
+/Applications/LibreOffice.app/Contents/MacOS/soffice -env:UserInstallation="file:///tmp/LibO_Conversion" --headless --invisible --convert-to pdf templates/*.odt --outdir pdf-preview
